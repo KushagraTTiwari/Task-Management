@@ -1,0 +1,35 @@
+{
+  "name": "task-management",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "build": "echo \"No build step defined\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KushagraTTiwari/Task-Management.git"
+  },
+  "author": "Kushagra Tiwari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KushagraTTiwari/Task-Management/issues"
+  },
+  "homepage": "https://github.com/KushagraTTiwari/Task-Management#readme",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcrypt-nodejs": "^0.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.17.0",
+    "nodemon": "^3.1.10",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
