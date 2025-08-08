@@ -12,7 +12,6 @@ The Task Management API is built using Node.js, Express.js, and MongoDB with Mon
 - **Database**: MongoDB with Mongoose ODM
 - **Authentication**: JWT (JSON Web Tokens)
 - **Password Hashing**: bcrypt
-- **API Documentation**: Swagger/OpenAPI
 - **CORS**: Cross-origin resource sharing enabled
 
 ### Project Structure
@@ -26,7 +25,6 @@ Task-Management/
     ├── config/              # Configuration files
     │   ├── config.js        # Environment variables
     │   ├── db.js            # Database connection
-    │   └── swagger.js       # Swagger documentation
     ├── constant/            # Application constants
     │   └── enum.js          # Status enums and constants
     ├── controllers/         # Business logic handlers
@@ -55,14 +53,11 @@ Task-Management/
 - Middleware configuration (CORS, JSON parsing)
 - Database connection
 - Route registration
-- Swagger documentation setup
 
 **Code Structure**:
 ```javascript
 import express from 'express';
 import cors from 'cors';
-import swaggerUi from 'swagger-ui-express';
-import { swaggerSpec } from './config/swagger.js';
 import connectDB from './config/db.js';
 import configVariables from './config/config.js';
 import authRoutes from './routes/auth.routes.js';
@@ -75,9 +70,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Swagger documentation
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 // Route registration
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
@@ -86,7 +78,6 @@ app.use('/api/tasks', taskRoutes);
 **Design Decisions**:
 - **ES6 Modules**: Using import/export for better tree-shaking and modern JavaScript features
 - **CORS Enabled**: Allows cross-origin requests for frontend integration
-- **Swagger Integration**: Interactive API documentation accessible at `/api-docs`
 - **Modular Routes**: Separate route files for different domains (auth, tasks)
 
 ### 2. Configuration Management (`src/config/`)
@@ -145,46 +136,12 @@ const connectDB = async () => {
 - **Async/Await**: Modern JavaScript for better error handling
 - **Logging**: Clear connection status feedback
 
-#### Swagger Configuration (`swagger.js`)
 **Purpose**: API documentation setup
 
 **Key Features**:
 - OpenAPI 3.0 specification
 - JWT authentication scheme
 - Automatic route discovery
-
-**Code Structure**:
-```javascript
-import swaggerJSDoc from 'swagger-jsdoc';
-
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Task Management API',
-      version: '1.0.0',
-      description: 'API for managing users, tasks, and subtasks with authentication',
-    },
-    servers: [
-      {
-        url: 'http://localhost:8080/',
-        description: 'Development server',
-      },
-    ],
-    components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
-        },
-      },
-    },
-    security: [{ bearerAuth: [] }],
-  },
-  apis: ['src/routes/*.js', 'src/controllers/*.js'],
-};
-```
 
 **Design Decisions**:
 - **OpenAPI 3.0**: Modern API specification standard
@@ -397,7 +354,6 @@ const subTaskSchema = new Schema({
 - Login with password verification
 - JWT token generation
 - Input validation
-- Swagger documentation
 
 **Code Structure**:
 ```javascript
@@ -444,7 +400,6 @@ export const registerUser = async (req, res) => {
 - **Password Security**: bcrypt hashing for password storage
 - **JWT Tokens**: Stateless authentication
 - **Error Handling**: Proper HTTP status codes
-- **Swagger Integration**: Embedded API documentation
 
 #### Task Controller (`task.controller.js`)
 **Purpose**: Task and subtask management logic
@@ -695,56 +650,3 @@ export function validHashPassword(password, user_password) {
 - **Stateless Design**: JWT authentication enables horizontal scaling
 - **Modular Architecture**: Easy to add new features
 - **Database Agnostic**: Mongoose abstraction allows database changes
-
-## Testing Strategy
-
-### 1. Unit Testing
-- **Controller Testing**: Test business logic in isolation
-- **Utility Testing**: Test helper functions
-- **Model Testing**: Test data validation
-
-### 2. Integration Testing
-- **API Testing**: Test complete request-response cycles
-- **Database Testing**: Test database operations
-- **Authentication Testing**: Test JWT token flow
-
-### 3. Manual Testing
-- **Swagger UI**: Interactive API testing
-- **Postman Collections**: Predefined test scenarios
-- **cURL Examples**: Command-line testing
-
-## Deployment Considerations
-
-### 1. Environment Configuration
-- **Environment Variables**: Secure configuration management
-- **Database Connection**: Production database configuration
-- **JWT Secret**: Secure secret management
-
-### 2. Security Hardening
-- **HTTPS**: SSL/TLS encryption
-- **Rate Limiting**: API abuse prevention
-- **Input Sanitization**: XSS prevention
-- **CORS Configuration**: Proper origin restrictions
-
-### 3. Monitoring
-- **Logging**: Application and error logging
-- **Health Checks**: Application health monitoring
-- **Performance Monitoring**: Response time tracking
-
-## Future Enhancements
-
-### 1. Planned Features
-- **Pagination**: For large datasets
-- **Search Functionality**: Task and subtask search
-- **File Attachments**: Task file uploads
-- **Email Notifications**: Deadline reminders
-- **Real-time Updates**: WebSocket integration
-
-### 2. Technical Improvements
-- **Rate Limiting**: API abuse prevention
-- **Caching**: Redis integration for performance
-- **Logging**: Structured logging with Winston
-- **Testing**: Comprehensive test suite
-- **CI/CD**: Automated deployment pipeline
-
-This comprehensive code documentation provides developers with a complete understanding of the codebase architecture, design decisions, and implementation details.

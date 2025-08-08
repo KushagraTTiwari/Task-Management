@@ -9,7 +9,7 @@ A comprehensive RESTful API for managing tasks and subtasks with user authentica
 - **Subtask Management**: Organize tasks with subtasks and deadlines
 - **Status Tracking**: Track task progress (pending, in-progress, completed)
 - **Soft Delete**: Preserve data integrity with soft deletion
-- **API Documentation**: Interactive Swagger documentation
+- **API Documentation**: Interactive Postman documentation
 - **Data Validation**: Comprehensive input validation and error handling
 
 ## 🗄️ Database Schema
@@ -116,9 +116,9 @@ Authorization: Bearer <your-jwt-token>
 
 ### Interactive API Documentation
 
-Access the interactive Swagger documentation at:
+Access the interactive Postman documentation at:
 ```
-http://localhost:8080/api-docs
+https://documenter.getpostman.com/view/29703371/2sB3BDLXLt
 ```
 
 ## 🛠️ Installation & Setup
@@ -181,7 +181,6 @@ Task-Management/
     ├── config/
     │   ├── config.js          # Environment configuration
     │   ├── db.js              # Database connection
-    │   └── swagger.js         # Swagger documentation setup
     ├── constant/
     │   └── enum.js            # Application constants
     ├── controllers/
@@ -218,7 +217,6 @@ Task-Management/
 - **Comprehensive error handling** with appropriate HTTP status codes
 - **Input validation** for all endpoints
 - **Business logic separation** from route definitions
-- **Swagger documentation** embedded in controller files
 
 #### 4. Security Features
 - **CORS enabled** for cross-origin requests

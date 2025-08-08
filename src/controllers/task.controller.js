@@ -11,77 +11,6 @@ const isValidFutureDate = (dateString) => {
   return inputDate > currentDate;
 };
 
-/**
- * @swagger
- * components:
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
- *   schemas:
- *     Task:
- *       type: object
- *       properties:
- *         _id:
- *           type: string
- *         subject:
- *           type: string
- *         deadline:
- *           type: string
- *           format: date
- *         status:
- *           type: string
- *           enum: [pending, in-progress, completed]
- *         createdBy:
- *           type: string
- *         is_deleted:
- *           type: boolean
- *         created_at:
- *           type: string
- *           format: date-time
- *         updated_at:
- *           type: string
- *           format: date-time
- *     SubTask:
- *       type: object
- *       properties:
- *         _id:
- *           type: string
- *         title:
- *           type: string
- *         taskId:
- *           type: string
- *         is_deleted:
- *           type: boolean
- *         created_at:
- *           type: string
- *           format: date-time
- *         updated_at:
- *           type: string
- *           format: date-time
- */
-
-/**
- * @swagger
- * /api/tasks:
- *   get:
- *     summary: Get all non-deleted tasks with their non-deleted subtasks
- *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: List of tasks
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Task'
- *       401:
- *         description: Unauthorized - Invalid or missing token
- */
 export const getTasks = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -103,46 +32,7 @@ export const getTasks = async (req, res) => {
   }
 };
 
-/**
- * @swagger
- * /api/tasks:
- *   post:
- *     summary: Create a new task
- *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - subject
- *               - deadline
- *               - status
- *             properties:
- *               subject:
- *                 type: string
- *                 example: Complete project documentation
- *               deadline:
- *                 type: string
- *                 format: date
- *                 example: 2024-01-15
- *               status:
- *                 type: string
- *                 enum: [pending, in-progress, completed]
- *                 example: pending
- *     responses:
- *       201:
- *         description: Task created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Task'
- *       400:
- *         description: Bad request - Invalid data
- */
+
 export const createTask = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -182,49 +72,7 @@ export const createTask = async (req, res) => {
   }
 };
 
-/**
- * @swagger
- * /api/tasks/{taskId}:
- *   put:
- *     summary: Update a task
- *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: taskId
- *         schema:
- *           type: string
- *         required: true
- *         description: The task ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               subject:
- *                 type: string
- *                 example: Updated project documentation
- *               deadline:
- *                 type: string
- *                 format: date
- *                 example: 2024-01-20
- *               status:
- *                 type: string
- *                 enum: [pending, in-progress, completed]
- *                 example: in-progress
- *     responses:
- *       200:
- *         description: Task updated successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Task'
- *       404:
- *         description: Task not found
- */
+
 export const updateTask = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -273,27 +121,7 @@ export const updateTask = async (req, res) => {
   }
 };
 
-/**
- * @swagger
- * /api/tasks/{taskId}:
- *   delete:
- *     summary: Soft delete a task
- *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: taskId
- *         schema:
- *           type: string
- *         required: true
- *         description: The task ID
- *     responses:
- *       200:
- *         description: Task deleted successfully
- *       404:
- *         description: Task not found
- */
+
 export const deleteTask = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -336,33 +164,7 @@ export const deleteTask = async (req, res) => {
   }
 };
 
-/**
- * @swagger
- * /api/tasks/{taskId}/subtasks:
- *   get:
- *     summary: Get all non-deleted subtasks for a task
- *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: taskId
- *         schema:
- *           type: string
- *         required: true
- *         description: The task ID
- *     responses:
- *       200:
- *         description: List of subtasks
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/SubTask'
- *       404:
- *         description: Task not found
- */
+
 export const getSubtasks = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -393,54 +195,7 @@ export const getSubtasks = async (req, res) => {
   }
 };
 
-/**
- * @swagger
- * /api/tasks/{taskId}/subtasks:
- *   post:
- *     summary: Create a new subtask for a task
- *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: taskId
- *         schema:
- *           type: string
- *         required: true
- *         description: The task ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - subject
- *               - deadline
- *             properties:
- *               subject:
- *                 type: string
- *                 example: Research phase
- *               deadline:
- *                 type: string
- *                 format: date
- *                 example: 2024-01-20
- *               status:
- *                 type: string
- *                 enum: [pending, in-progress, completed]
- *                 example: pending
- *     responses:
- *       201:
- *         description: Subtask created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/SubTask'
- *       400:
- *         description: Bad request - Invalid data
- *       404:
- *         description: Task not found
- */
+
 export const createSubTask = async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -500,63 +255,7 @@ export const createSubTask = async (req, res) => {
   }
 };
 
-/**
- * @swagger
- * /api/tasks/{taskId}/subtasks:
- *   put:
- *     summary: Update subtasks for a task
- *     tags: [Tasks]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: taskId
- *         schema:
- *           type: string
- *         required: true
- *         description: The task ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - subtasks
- *             properties:
- *               subtasks:
- *                 type: array
- *                 items:
- *                   type: object
- *                   required:
- *                     - subject
- *                     - deadline
- *                   properties:
- *                     subject:
- *                       type: string
- *                       example: Research phase
- *                     deadline:
- *                       type: string
- *                       format: date
- *                       example: 2024-01-20
- *                     status:
- *                       type: string
- *                       enum: [pending, in-progress, completed]
- *                       example: pending
- *     responses:
- *       200:
- *         description: Subtasks updated successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/SubTask'
- *       400:
- *         description: Bad request - Invalid data
- *       404:
- *         description: Task not found
- */
+
 export const updateSubtasks = async (req, res) => {
   try {
     const userId = req.user.userId;
