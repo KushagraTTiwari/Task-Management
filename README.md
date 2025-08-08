@@ -243,8 +243,8 @@ Task-Management/
 curl -X POST http://localhost:8080/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "John Doe",
-    "email": "john@example.com",
+    "name": "kushagra",
+    "email": "kushagra@example.com",
     "password": "password123"
   }'
 ```
@@ -254,7 +254,7 @@ curl -X POST http://localhost:8080/api/auth/register \
 curl -X POST http://localhost:8080/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "john@example.com",
+    "email": "kushagra@example.com",
     "password": "password123"
   }'
 ```
@@ -306,6 +306,7 @@ This project is licensed under the ISC License.
 **Kushagra Tiwari**
 - GitHub: [@KushagraTTiwari](https://github.com/KushagraTTiwari)
 - Repository: [Task-Management](https://github.com/KushagraTTiwari/Task-Management)
+- Deployed Link: [Link](https://task-management-sigma-ochre-57.vercel.app/)
 
 ## 🐛 Issues
 
