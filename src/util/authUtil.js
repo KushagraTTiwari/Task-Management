@@ -11,10 +11,10 @@ export function authenticateToken(req, res, next) {
   let token = req.headers.authorization;
   if (token) {
     token = token.split(" ")[1];
-    jwt.verify(token, serverConfig.JWT_SECRET, (err, payload) => {
+    jwt.verify(token, configVariables.JWT_SECRET, (err, payload) => {
       if (err) {
         res.status(403).json({
-          message: "Unauthorized Access",
+          message: "Unauthorized ",
         });
       } else {
         req.user = payload;
@@ -23,7 +23,7 @@ export function authenticateToken(req, res, next) {
     });
   } else {
     res.status(403).json({
-      message: "Unauthorized Access",
+      message: "Unauthorized Accessss",
     });
   }
 }

@@ -25,7 +25,7 @@ const options = {
     },
     security: [{ bearerAuth: [] }], // Apply JWT to all routes by default
   },
-  apis: ['./routes/*.js', './controllers/*.js'], // Paths to files with JSDoc comments
+  apis: ['src/routes/*.js', 'src/controllers/*.js'], // Paths to files with JSDoc comments
 };
 
 export const swaggerSpec = swaggerJSDoc(options);

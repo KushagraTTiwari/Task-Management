@@ -41,6 +41,6 @@ const taskSchema = new Schema({
     },
 });
 
-userSchema.set("versionKey", false);
+taskSchema.set("versionKey", false);
 
 export default mongoose.model("task", taskSchema);

@@ -35,6 +35,6 @@ const subTaskSchema = new Schema({
     },
 });
 
-userSchema.set("versionKey", false);
+subTaskSchema.set("versionKey", false);
 
 export default mongoose.model("subTask", subTaskSchema);
