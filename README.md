@@ -82,6 +82,11 @@ The application uses MongoDB with three main collections:
 http://localhost:8080
 ```
 
+### Deployed URL
+```
+https://task-management-sigma-ochre-57.vercel.app/
+```
+
 ### Authentication
 All protected endpoints require a JWT token in the Authorization header:
 ```
@@ -136,7 +141,7 @@ Create a `.env` file in the root directory:
 ```env
 MONGO_URL=mongodb://localhost:27017/task-management
 PORT=8080
-JWT_SECRET=your-secret-key-here
+JWT_SECRET=enter-your-secret-key
 ```
 
 ### Installation Steps
